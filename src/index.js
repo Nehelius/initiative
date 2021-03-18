@@ -90,7 +90,7 @@ function App() {
 
     setNames(array)
 
-    if (names.length === 2) {
+    if (names.length <= 2) {
       e.target.parentNode.nextElementSibling.classList.remove('init')
       
       setStart(false)
