@@ -13,6 +13,7 @@ function App() {
   const handleSubmit = () => {
     let nameInput = document.getElementById('nameInput').value
     let initInput = document.getElementById('initInput').value
+    let dexInput = document.getElementById('dexInput').value
 
     let repeated
     
@@ -30,10 +31,12 @@ function App() {
       setError("Please write a name.")
     } else if (initInput === "") {
       setError("Please write the initiative value.")
+    } else if (dexInput === "") {
+      setError("Please write the dexterity value")
     } else if (repeated) {
       setError("Please don't repeat names")
     } else {
-      setNames([...names, {name: nameInput, initiative: initInput}])
+      setNames([...names, {name: nameInput, initiative: initInput, dexterity: dexInput}])
       document.getElementById("inputForm").reset()
     }
   }
@@ -42,25 +45,10 @@ function App() {
     if (a.initiative !== b.initiative) {
       return b.initiative - a.initiative
     } else {
-      if ( a.name < b.name ){
-        return -1
-      }
-      if ( a.name > b.name ){
-        return 1
-      }
+      return b.dexterity - a.dexterity
     }
   }
 
-  const displayNames = names.sort(compare).map(entry => {
-    return (
-      <div className="entry" id={entry.name} key={entry.name}>
-        <div>Name: <strong>{entry.name}</strong></div>
-        <div>Initiative: <strong>{entry.initiative}</strong></div>
-      </div>
-    )
-  })
-
-  
   const handleStart = () => {
     const chosen = document.getElementById(names[0].name)
     
@@ -87,6 +75,42 @@ function App() {
     
     setCurrentInit(next.id)
   }
+
+  const handleRemove = (e) => {
+    let index = e.target.value
+    let array = [...names]
+
+    if (e.target.parentNode.classList.contains("init")) {
+      handleNext()
+    }
+
+    setNames([])
+
+    array.splice(index, 1)
+
+    setNames(array)
+
+    if (names.length === 2) {
+      e.target.parentNode.nextElementSibling.classList.remove('init')
+      
+      setStart(false)
+      setCurrentInit("")
+    }
+  }
+
+  const displayNames = names.sort(compare).map(entry => {
+    return (
+      <div className="entry" id={entry.name} key={entry.name}>
+        <div>Name: <strong>{entry.name}</strong></div>
+        <div>Initiative: <strong>{entry.initiative}</strong></div>
+        <div>Dexterity: {entry.dexterity}</div>
+        <button value={names.indexOf(entry)} id="removeEntryButton" onClick={handleRemove}>x</button>
+      </div>
+    )
+  })
+
+  
+  
 
   const handleReset = () => {
     setNames([])
