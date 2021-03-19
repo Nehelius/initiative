@@ -91,7 +91,9 @@ function App() {
     setNames(array)
 
     if (names.length <= 2) {
-      e.target.parentNode.nextElementSibling.classList.remove('init')
+      let entry = document.getElementById(names[0].name)
+      
+      entry.classList.remove('init')
       
       setStart(false)
       setCurrentInit("")
@@ -101,10 +103,12 @@ function App() {
   const displayNames = names.sort(compare).map(entry => {
     return (
       <div className="entry" id={entry.name} key={entry.name}>
-        <div>Name: <strong>{entry.name}</strong></div>
-        <div>Initiative: <strong>{entry.initiative}</strong></div>
-        <div>Dexterity: {entry.dexterity}</div>
-        <button value={names.indexOf(entry)} id="removeEntryButton" onClick={handleRemove}>x</button>
+        <div className="entry-details">
+          <p>Name: <strong>{entry.name}</strong></p>
+          <p>Initiative: <strong>{entry.initiative}</strong></p>
+          <p>Dexterity: {entry.dexterity}</p>
+        </div>
+        <button value={names.indexOf(entry)} id="removeEntryButton" onClick={handleRemove}>X</button>
       </div>
     )
   })

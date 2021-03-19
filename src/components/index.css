@@ -17,6 +17,8 @@ input {
   height: 3em;
   border: 0;
   text-align: center;
+  font-size: 1em;
+  padding: 0;
 }
 
 #nameInput {
@@ -34,20 +36,25 @@ input {
 }
 
 #removeEntryButton {
-  background-color: crimson;
+  background-color: rgb(161, 23, 50);
   width: 1.5em;
   height: 1.5em;
   text-align: center;
+  line-height: 0px;
 }
 
 button {
-  margin-top: 1em;
   height: 2em;
   width: 4em;
   border: 0;
   border-radius: 5px;
   font-size: 1.5em;
   padding: 5px;
+  display: inline;
+}
+
+#addButton {
+  margin-top: 0.5em;
 }
 
 #controlButtons {
@@ -71,12 +78,27 @@ h3 {
   opacity: 0.5;
   padding: 5px;
   width: 60%;
+  border: 5px solid darkgray;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry-details {
+  width: 80%;
+  display: inline;
+  text-align: start;
+}
+
+p {
+  margin: 0;
+  width: 100%;
 }
 
 .init {
   width: 80%;
-  background: rgb(78, 196, 78);
+  background: rgb(77, 163, 77);
   opacity: 1;
   font-size: 1.5em;
   text-align: center;
